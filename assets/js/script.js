@@ -1,10 +1,11 @@
 const map = [
-    'aaaaaaa',
-    'bbbbbbb',
-    'ccccccc',
-    'ddddddd',
-    'eeeeeee',
-    'fffffff'
+    'aaaaaa',
+    'bbbbbb',
+    'cccccc',
+    'dddddd',
+    'eeeeee',
+    'ffffff',
+    'gggggg'
 ]
 
 const $wrapper = document.querySelector('#wrapper');
@@ -15,10 +16,7 @@ for(let i=0; i<map.length; i++){
     let col = document.createElement('section');
 
     //identificação 
-    col.dataset.columnNumber = `${i+1}`;
-
-    //identificação 
-    col.classList = 'column';
+    col.classList = `column column_${i+1}`;
 
     //ppendurando as colunas no html
     $wrapper.appendChild(col);
@@ -28,49 +26,62 @@ for(let i=0; i<map.length; i++){
         let div = document.createElement('div');
 
         //identificação 
-        div.dataset.indexNumber = `${j+1}`;
+        div.classList= `column${i+1}`;
 
         //pendurando as div nas seção
         col.appendChild(div);
     }
 }
 
-// const disc = document.createElement('span');
-
 let usuario = true;
-
-
+let win = 0; //variavel para as condições de vitória
+let arr=[]; //array para as condições de vitória
 const $column = document.querySelectorAll('.column');
 $column.forEach(collumn => {
     collumn.addEventListener('click', (ev)=>{
-        console.log(ev.target);//representa 
-        console.log(ev.currentTarget);//representa a coluna/section
-
+        //condição de vitória horizontal
+        for(let x =1; x<=7; x++){
+            arr.push(document.querySelector(`.column_${x}`).children);
+        }
+        let teste = arr[0][0].children.classList;//salvar o nome da class pra fazer a validação a partir dela
+        console.log(teste);
+        //adicionar os discos
+        let append = ev.currentTarget.children;//cria um array com os filhos
+        let index = 0;
+        let valid=0;
 
         if(usuario){
             const disc = document.createElement('div');
-            // disc.style.backgroundColor = 'red';
             disc.classList = 'disc';
 
-            //coluna adicina um disco no ultimo filho
-            ev.currentTarget.firstChild.appendChild(disc);
-            usuario = false;
+            //coluna adicina um disco no ultimo filho que estiver vazio 
+            while(valid === 0 && append[5].hasChildNodes() === false){
+                if(append[index].hasChildNodes() === false){
+                    append[index].appendChild(disc);
+                    usuario = false;
+                    valid++;
+                }else{
+                    index++;
+                }
+            }
         }else{
             const disc = document.createElement('div');
-            // disc.style.backgroundColor = 'red';
             disc.classList = 'discB';
 
-            //coluna adicina um disco no ultimo filho
-            ev.currentTarget.firstChild.appendChild(disc);
-            usuario = true;
+            //coluna adicina um disco no ultimo filho que estiver vazio
+            while(valid === 0 && append[5].hasChildNodes() === false){
+                if(append[index].hasChildNodes() === false){
+                    append[index].appendChild(disc);
+                    usuario = true;
+                    valid++;
+                }else{
+                    index++;
+                }
+            }
         }
 
         
     });
 });
-
-
-
-document.querySelector('.disc').style.backgroundColor = 'red'
 
     
