@@ -9,29 +9,32 @@ const map = [
 ]
 
 const $wrapper = document.querySelector('#wrapper');
+const createTable=()=>{
 
-
-for (let i = 0; i < map.length; i++) {
-    //criando as colunas 
-    let col = document.createElement('section');
-
-    //identificação 
-    col.classList = `column column_${i+1}`;
-
-    //ppendurando as colunas no html
-    $wrapper.appendChild(col);
-
-    for (let j = 0; j < map[i].length; j++) {
-        //criando as divs
-        let div = document.createElement('div');
-
+    for (let i = 0; i < map.length; i++) {
+        //criando as colunas 
+        let col = document.createElement('section');
+    
         //identificação 
-        div.classList = `column${i+1}`;
+        col.classList = `column column_${i+1}`;
 
-        //pendurando as div nas seção
-        col.appendChild(div);
+        col.id = `section_${i+1}`;
+    
+        //ppendurando as colunas no html
+        $wrapper.appendChild(col);
+    
+        for (let j = 0; j < map[i].length; j++) {
+            //criando as divs
+            let div = document.createElement('div');
+    
+            //identificação 
+            div.classList = `column${i+1}`;
+    
+            //pendurando as div nas seção
+            col.appendChild(div);
+        }
     }
-}
+};createTable();
 
 let wins = 0;
 
@@ -54,6 +57,7 @@ $column.forEach(collumn => {
                     if (append[index].hasChildNodes() === false) {
                         append[index].appendChild(disc);
                         usuario = false;
+                        animationRed(ev.currentTarget.id);
                         valid++;
                     } else {
                         index++;
@@ -68,16 +72,17 @@ $column.forEach(collumn => {
                     if (append[index].hasChildNodes() === false) {
                         append[index].appendChild(disc);
                         usuario = true;
+                        animationBlack(ev.currentTarget.id);
                         valid++;
                     } else {
                         index++;
                     }
                 }
             }
-            // verticalVictory();
-            // horizontalVictory();
-            // diagonalRightVictory();
-            // diagonalLeftVictory();
+            verticalVictory();
+            horizontalVictory();
+            diagonalRightVictory();
+            diagonalLeftVictory();
             drawVerificator();
         }
     });
@@ -290,7 +295,40 @@ let drawVerificator = function() {
         const txt = document.createTextNode('Empate')
         span.appendChild(txt);
         win.insertBefore(span, script);
-        wins++
-        reset()
+        wins++;
+        reset();
     } else { return false }
+}
+
+/*******************************************************************************************************/
+const animationRed =(section)=>{
+    let divs = document.querySelectorAll(`#${section}>div`);
+
+   for(let o=0; o<divs.length; o++){
+
+        if(!divs[o].hasChildNodes()){
+            divs[o].classList.add('animation_red');
+        
+            setTimeout(function() {
+            divs[o].classList.remove('animation_red')
+            }, 2800)
+        }
+    }
+
+}
+
+const animationBlack =(sectionm)=>{
+    let divz = document.querySelectorAll(`#${sectionm}>div`);
+
+   for(let a=0; a<divz.length; a++){
+
+        if(!divz[a].hasChildNodes()){
+            divz[a].classList.add('animation_black');
+        
+            setTimeout(function() {
+            divz[a].classList.remove('animation_black')
+            }, 2800)
+        }
+    }
+
 }
