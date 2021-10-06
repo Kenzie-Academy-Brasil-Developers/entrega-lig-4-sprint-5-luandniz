@@ -135,6 +135,7 @@ let verticalVictory = function(churrus) {
                         span.appendChild(txt);
                         win.insertBefore(span, script);
                         wins++;
+                        reset();
                     } else if (churrus[y][x] === 2){
                         const win = document.querySelector('body');
                         const span = document.createElement('span');
@@ -143,6 +144,7 @@ let verticalVictory = function(churrus) {
                         span.appendChild(txt);
                         win.insertBefore(span, script);
                         wins++;
+                        reset();
                     }
                 }
             }
@@ -152,7 +154,7 @@ let verticalVictory = function(churrus) {
 
 let horizontalVictory = function(churrus) {
     const edgeX = churrus[0].length - 2;
-    const edgeY = churrus.length - 2;
+    const edgeY = churrus.length - 3;
 
     for (let y = 0; y < edgeY; y++) {
 
@@ -170,6 +172,7 @@ let horizontalVictory = function(churrus) {
                         span.appendChild(txt);
                         win.insertBefore(span, script);
                         wins++;
+                        reset();
                     } else if (churrus[y][x] === 2){
                         const win = document.querySelector('body');
                         const span = document.createElement('span');
@@ -178,6 +181,7 @@ let horizontalVictory = function(churrus) {
                         span.appendChild(txt);
                         win.insertBefore(span, script);
                         wins++;
+                        reset();
                     }
                 }
             }
@@ -205,6 +209,7 @@ let diagonalRightVictory = function(board){
                         span.appendChild(txt);
                         win.insertBefore(span, script);
                         wins++;
+                        reset();
                     } else if (board[y][x] === 2){
                         const win = document.querySelector('body');
                         const span = document.createElement('span');
@@ -213,6 +218,7 @@ let diagonalRightVictory = function(board){
                         span.appendChild(txt);
                         win.insertBefore(span, script);
                         wins++;
+                        reset();
                     }
                 }
             }
@@ -240,6 +246,7 @@ let diagonalLeftVictory = function(board){
                         span.appendChild(txt);
                         win.insertBefore(span, script);
                         wins++;
+                        reset();
                     } else if (board[coluna][linha] === 2){
                         const win = document.querySelector('body');
                         const span = document.createElement('span');
@@ -248,9 +255,20 @@ let diagonalLeftVictory = function(board){
                         span.appendChild(txt);
                         win.insertBefore(span, script);
                         wins++;
+                        reset();
                     }
                 }
             }
         }
     }
+}
+
+let reset = function(){
+    const reset = document.querySelector('body');
+    const script = document.querySelector('script');
+    const button = document.createElement('button');
+    const txt = document.createTextNode('Jogar Novamente');
+    button.appendChild(txt);
+    reset.insertBefore(button, script);
+    button.addEventListener('click', (e) => location.reload());
 }
