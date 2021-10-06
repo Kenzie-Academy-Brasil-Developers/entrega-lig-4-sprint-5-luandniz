@@ -74,10 +74,10 @@ $column.forEach(collumn => {
                     }
                 }
             }
-            verticalVictory();
-            horizontalVictory();
-            diagonalRightVictory();
-            diagonalLeftVictory();
+            // verticalVictory();
+            // horizontalVictory();
+            // diagonalRightVictory();
+            // diagonalLeftVictory();
             drawVerificator();
         }
     });
@@ -275,9 +275,9 @@ let reset = function() {
 }
 
 let draw = function(x) {
-    let map = CheckMap()
-    map = map[x]
-    if (map.includes(0) === false) { return true } else { return false }
+    let arrayMap = CheckMap()
+    arrayMap = arrayMap[x]
+    if (arrayMap.includes(0) === false) { return true } else { return false }
 }
 
 let drawVerificator = function() {
@@ -290,6 +290,7 @@ let drawVerificator = function() {
         const txt = document.createTextNode('Empate')
         span.appendChild(txt);
         win.insertBefore(span, script);
+        wins++
         reset()
     } else { return false }
 }
