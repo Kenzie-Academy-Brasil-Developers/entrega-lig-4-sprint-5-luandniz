@@ -33,13 +33,13 @@ for (let i = 0; i < map.length; i++) {
     }
 }
 
-let wins=0;
+let wins = 0;
 
 let usuario = true;
 const $column = document.querySelectorAll('.column');
 $column.forEach(collumn => {
     collumn.addEventListener('click', (ev) => {
-        if(wins === 0){
+        if (wins === 0) {
             //adicionar os discos
             let append = ev.currentTarget.children; //cria um array com os filhos
             let index = 0;
@@ -102,13 +102,13 @@ let CheckMap = function() {
 let mapMaker = function(x) {
     let result = []
     for (i = 0; i < x.length; i++) {
-        if (x[i].hasChildNodes() === false) { 
-            result.push(0) 
+        if (x[i].hasChildNodes() === false) {
+            result.push(0)
         } else {
-            if (x[i].firstElementChild.classList.contains('disc')) { 
-                result.push(1) 
-            } else { 
-                result.push(2) 
+            if (x[i].firstElementChild.classList.contains('disc')) {
+                result.push(1)
+            } else {
+                result.push(2)
             }
         }
     }
@@ -127,7 +127,7 @@ let verticalVictory = function(churrus) {
             if (cell !== 0) {
 
                 if (cell === churrus[y][x + 1] && cell === churrus[y][x + 2] && cell === churrus[y][x + 3]) {
-                    if(churrus[y][x] === 1){
+                    if (churrus[y][x] === 1) {
                         const win = document.querySelector('body');
                         const span = document.createElement('span');
                         const script = document.querySelector('script');
@@ -136,7 +136,7 @@ let verticalVictory = function(churrus) {
                         win.insertBefore(span, script);
                         wins++;
                         reset();
-                    } else if (churrus[y][x] === 2){
+                    } else if (churrus[y][x] === 2) {
                         const win = document.querySelector('body');
                         const span = document.createElement('span');
                         const script = document.querySelector('script');
@@ -153,92 +153,92 @@ let verticalVictory = function(churrus) {
 }
 
 let horizontalVictory = function(churrus) {
-    const edgeX = churrus[0].length - 2;
-    const edgeY = churrus.length - 3;
+        const edgeX = churrus[0].length - 2;
+        const edgeY = churrus.length - 3;
 
-    for (let y = 0; y < edgeY; y++) {
+        for (let y = 0; y < edgeY; y++) {
 
-        for (let x = 0; x < churrus[0].length; x++) {
-            let cell = churrus[y][x];
+            for (let x = 0; x < churrus[0].length; x++) {
+                let cell = churrus[y][x];
 
-            if (cell !== 0) {
+                if (cell !== 0) {
 
-                if (cell === churrus[y + 1][x] && cell === churrus[y + 2][x] && cell === churrus[y + 3][x]) {
-                    if(churrus[y][x] === 1){
-                        const win = document.querySelector('body');
-                        const span = document.createElement('span');
-                        const script = document.querySelector('script');
-                        const txt = document.createTextNode('Vitória do Vermelho');
-                        span.appendChild(txt);
-                        win.insertBefore(span, script);
-                        wins++;
-                        reset();
-                    } else if (churrus[y][x] === 2){
-                        const win = document.querySelector('body');
-                        const span = document.createElement('span');
-                        const script = document.querySelector('script');
-                        const txt = document.createTextNode('Vitória do Preto');
-                        span.appendChild(txt);
-                        win.insertBefore(span, script);
-                        wins++;
-                        reset();
+                    if (cell === churrus[y + 1][x] && cell === churrus[y + 2][x] && cell === churrus[y + 3][x]) {
+                        if (churrus[y][x] === 1) {
+                            const win = document.querySelector('body');
+                            const span = document.createElement('span');
+                            const script = document.querySelector('script');
+                            const txt = document.createTextNode('Vitória do Vermelho');
+                            span.appendChild(txt);
+                            win.insertBefore(span, script);
+                            wins++;
+                            reset();
+                        } else if (churrus[y][x] === 2) {
+                            const win = document.querySelector('body');
+                            const span = document.createElement('span');
+                            const script = document.querySelector('script');
+                            const txt = document.createTextNode('Vitória do Preto');
+                            span.appendChild(txt);
+                            win.insertBefore(span, script);
+                            wins++;
+                            reset();
+                        }
                     }
                 }
             }
         }
     }
-}
-// Função de vitoria diagonal direita ESTÁ PEGANDO
-let diagonalRightVictory = function(board){
-    const edgeX = board[0].length - 3;
-    const edgeY = board.length - 3;
-    // itere cada linha
-    for (let y = 0; y < edgeY; y++) {
-        //itere cada célula em cada linha
-        for (let x = 0; x < edgeX; x++) {
-            cell = board[y][x];
-            //Checa somente se a célula está preenchida
-            if (cell !== 0) {
-                // Checa as próximas três células para o mesmo valor
-                if (cell === board[y + 1][x + 1] && cell === board[y + 2][x + 2] && cell === board[y + 3][x + 3]) {
-                    if(board[y][x] === 1){
-                        const win = document.querySelector('body');
-                        const span = document.createElement('span');
-                        const script = document.querySelector('script');
-                        const txt = document.createTextNode('Vitória do Vermelho');
-                        span.appendChild(txt);
-                        win.insertBefore(span, script);
-                        wins++;
-                        reset();
-                    } else if (board[y][x] === 2){
-                        const win = document.querySelector('body');
-                        const span = document.createElement('span');
-                        const script = document.querySelector('script');
-                        const txt = document.createTextNode('Vitória do Preto');
-                        span.appendChild(txt);
-                        win.insertBefore(span, script);
-                        wins++;
-                        reset();
+    // Função de vitoria diagonal direita ESTÁ PEGANDO
+let diagonalRightVictory = function(board) {
+        const edgeX = board[0].length - 3;
+        const edgeY = board.length - 3;
+        // itere cada linha
+        for (let y = 0; y < edgeY; y++) {
+            //itere cada célula em cada linha
+            for (let x = 0; x < edgeX; x++) {
+                cell = board[y][x];
+                //Checa somente se a célula está preenchida
+                if (cell !== 0) {
+                    // Checa as próximas três células para o mesmo valor
+                    if (cell === board[y + 1][x + 1] && cell === board[y + 2][x + 2] && cell === board[y + 3][x + 3]) {
+                        if (board[y][x] === 1) {
+                            const win = document.querySelector('body');
+                            const span = document.createElement('span');
+                            const script = document.querySelector('script');
+                            const txt = document.createTextNode('Vitória do Vermelho');
+                            span.appendChild(txt);
+                            win.insertBefore(span, script);
+                            wins++;
+                            reset();
+                        } else if (board[y][x] === 2) {
+                            const win = document.querySelector('body');
+                            const span = document.createElement('span');
+                            const script = document.querySelector('script');
+                            const txt = document.createTextNode('Vitória do Preto');
+                            span.appendChild(txt);
+                            win.insertBefore(span, script);
+                            wins++;
+                            reset();
+                        }
                     }
                 }
             }
         }
     }
-}
-// Função de vitoria diagonal esquerda ESTÁ PEGANDO
-let diagonalLeftVictory = function(board){
+    // Função de vitoria diagonal esquerda ESTÁ PEGANDO
+let diagonalLeftVictory = function(board) {
     const edgeX = board[0].length - 2;
     const edgeY = board.length - 2;
     // itere cada linha
     for (let coluna = 3; coluna < board.length; coluna++) {
-         //itere cada célula em cada linha
+        //itere cada célula em cada linha
         for (let linha = 0; linha < edgeX; linha++) {
             cell = board[coluna][linha];
-             //Checa somente se a célula está preenchida
+            //Checa somente se a célula está preenchida
             if (cell !== 0) {
-            // Checa as próximas três células para o mesmo valor
+                // Checa as próximas três células para o mesmo valor
                 if (cell === board[coluna - 1][linha + 1] && cell === board[coluna - 2][linha + 2] && cell === board[coluna - 3][linha + 3]) {
-                    if(board[coluna][linha] === 1){
+                    if (board[coluna][linha] === 1) {
                         const win = document.querySelector('body');
                         const span = document.createElement('span');
                         const script = document.querySelector('script');
@@ -247,7 +247,7 @@ let diagonalLeftVictory = function(board){
                         win.insertBefore(span, script);
                         wins++;
                         reset();
-                    } else if (board[coluna][linha] === 2){
+                    } else if (board[coluna][linha] === 2) {
                         const win = document.querySelector('body');
                         const span = document.createElement('span');
                         const script = document.querySelector('script');
@@ -263,7 +263,7 @@ let diagonalLeftVictory = function(board){
     }
 }
 
-let reset = function(){
+let reset = function() {
     const reset = document.querySelector('body');
     const script = document.querySelector('script');
     const button = document.createElement('button');
