@@ -74,10 +74,11 @@ $column.forEach(collumn => {
                     }
                 }
             }
-            verticalVictory(CheckMap());
-            horizontalVictory(CheckMap());
-            diagonalRightVictory(CheckMap());
-            diagonalLeftVictory(CheckMap());
+            verticalVictory();
+            horizontalVictory();
+            diagonalRightVictory();
+            diagonalLeftVictory();
+            drawVerificator();
         }
     });
 });
@@ -115,19 +116,19 @@ let mapMaker = function(x) {
     return result
 }
 
-let verticalVictory = function(churrus) {
-    const edgeX = churrus[0].length - 2;
-    const edgeY = churrus.length - 2;
+let verticalVictory = function() {
+    const edgeX = CheckMap()[0].length - 2;
+    const edgeY = CheckMap().length - 2;
 
-    for (let y = 0; y < churrus.length; y++) {
+    for (let y = 0; y < CheckMap().length; y++) {
 
         for (let x = 0; x < edgeX; x++) {
-            let cell = churrus[y][x];
+            let cell = CheckMap()[y][x];
 
             if (cell !== 0) {
 
-                if (cell === churrus[y][x + 1] && cell === churrus[y][x + 2] && cell === churrus[y][x + 3]) {
-                    if (churrus[y][x] === 1) {
+                if (cell === CheckMap()[y][x + 1] && cell === CheckMap()[y][x + 2] && cell === CheckMap()[y][x + 3]) {
+                    if (CheckMap()[y][x] === 1) {
                         const win = document.querySelector('body');
                         const span = document.createElement('span');
                         const script = document.querySelector('script');
@@ -136,7 +137,7 @@ let verticalVictory = function(churrus) {
                         win.insertBefore(span, script);
                         wins++;
                         reset();
-                    } else if (churrus[y][x] === 2) {
+                    } else if (CheckMap()[y][x] === 2) {
                         const win = document.querySelector('body');
                         const span = document.createElement('span');
                         const script = document.querySelector('script');
@@ -152,19 +153,19 @@ let verticalVictory = function(churrus) {
     }
 }
 
-let horizontalVictory = function(churrus) {
-        const edgeX = churrus[0].length - 2;
-        const edgeY = churrus.length - 3;
+let horizontalVictory = function() {
+        const edgeX = CheckMap()[0].length - 2;
+        const edgeY = CheckMap().length - 3;
 
         for (let y = 0; y < edgeY; y++) {
 
-            for (let x = 0; x < churrus[0].length; x++) {
-                let cell = churrus[y][x];
+            for (let x = 0; x < CheckMap()[0].length; x++) {
+                let cell = CheckMap()[y][x];
 
                 if (cell !== 0) {
 
-                    if (cell === churrus[y + 1][x] && cell === churrus[y + 2][x] && cell === churrus[y + 3][x]) {
-                        if (churrus[y][x] === 1) {
+                    if (cell === CheckMap()[y + 1][x] && cell === CheckMap()[y + 2][x] && cell === CheckMap()[y + 3][x]) {
+                        if (CheckMap()[y][x] === 1) {
                             const win = document.querySelector('body');
                             const span = document.createElement('span');
                             const script = document.querySelector('script');
@@ -173,7 +174,7 @@ let horizontalVictory = function(churrus) {
                             win.insertBefore(span, script);
                             wins++;
                             reset();
-                        } else if (churrus[y][x] === 2) {
+                        } else if (CheckMap()[y][x] === 2) {
                             const win = document.querySelector('body');
                             const span = document.createElement('span');
                             const script = document.querySelector('script');
@@ -189,19 +190,19 @@ let horizontalVictory = function(churrus) {
         }
     }
     // Função de vitoria diagonal direita ESTÁ PEGANDO
-let diagonalRightVictory = function(board) {
-        const edgeX = board[0].length - 3;
-        const edgeY = board.length - 3;
+let diagonalRightVictory = function() {
+        const edgeX = CheckMap()[0].length - 3;
+        const edgeY = CheckMap().length - 3;
         // itere cada linha
         for (let y = 0; y < edgeY; y++) {
             //itere cada célula em cada linha
             for (let x = 0; x < edgeX; x++) {
-                cell = board[y][x];
+                cell = CheckMap()[y][x];
                 //Checa somente se a célula está preenchida
                 if (cell !== 0) {
                     // Checa as próximas três células para o mesmo valor
-                    if (cell === board[y + 1][x + 1] && cell === board[y + 2][x + 2] && cell === board[y + 3][x + 3]) {
-                        if (board[y][x] === 1) {
+                    if (cell === CheckMap()[y + 1][x + 1] && cell === CheckMap()[y + 2][x + 2] && cell === CheckMap()[y + 3][x + 3]) {
+                        if (CheckMap()[y][x] === 1) {
                             const win = document.querySelector('body');
                             const span = document.createElement('span');
                             const script = document.querySelector('script');
@@ -210,7 +211,7 @@ let diagonalRightVictory = function(board) {
                             win.insertBefore(span, script);
                             wins++;
                             reset();
-                        } else if (board[y][x] === 2) {
+                        } else if (CheckMap()[y][x] === 2) {
                             const win = document.querySelector('body');
                             const span = document.createElement('span');
                             const script = document.querySelector('script');
@@ -226,19 +227,19 @@ let diagonalRightVictory = function(board) {
         }
     }
     // Função de vitoria diagonal esquerda ESTÁ PEGANDO
-let diagonalLeftVictory = function(board) {
-    const edgeX = board[0].length - 2;
-    const edgeY = board.length - 2;
+let diagonalLeftVictory = function() {
+    const edgeX = CheckMap()[0].length - 2;
+    const edgeY = CheckMap().length - 2;
     // itere cada linha
-    for (let coluna = 3; coluna < board.length; coluna++) {
+    for (let coluna = 3; coluna < CheckMap().length; coluna++) {
         //itere cada célula em cada linha
         for (let linha = 0; linha < edgeX; linha++) {
-            cell = board[coluna][linha];
+            cell = CheckMap()[coluna][linha];
             //Checa somente se a célula está preenchida
             if (cell !== 0) {
                 // Checa as próximas três células para o mesmo valor
-                if (cell === board[coluna - 1][linha + 1] && cell === board[coluna - 2][linha + 2] && cell === board[coluna - 3][linha + 3]) {
-                    if (board[coluna][linha] === 1) {
+                if (cell === CheckMap()[coluna - 1][linha + 1] && cell === CheckMap()[coluna - 2][linha + 2] && cell === CheckMap()[coluna - 3][linha + 3]) {
+                    if (CheckMap()[coluna][linha] === 1) {
                         const win = document.querySelector('body');
                         const span = document.createElement('span');
                         const script = document.querySelector('script');
@@ -247,7 +248,7 @@ let diagonalLeftVictory = function(board) {
                         win.insertBefore(span, script);
                         wins++;
                         reset();
-                    } else if (board[coluna][linha] === 2) {
+                    } else if (CheckMap()[coluna][linha] === 2) {
                         const win = document.querySelector('body');
                         const span = document.createElement('span');
                         const script = document.querySelector('script');
@@ -271,4 +272,24 @@ let reset = function() {
     button.appendChild(txt);
     reset.insertBefore(button, script);
     button.addEventListener('click', (e) => location.reload());
+}
+
+let draw = function(x) {
+    let map = CheckMap()
+    map = map[x]
+    if (map.includes(0) === false) { return true } else { return false }
+}
+
+let drawVerificator = function() {
+
+    if (draw(0) === true && draw(1) === true && draw(2) === true && draw(3) === true && draw(4) === true && draw(5) === true && draw(6) === true) {
+
+        const win = document.querySelector('body');
+        const span = document.createElement('span');
+        const script = document.querySelector('script');
+        const txt = document.createTextNode('Empate')
+        span.appendChild(txt);
+        win.insertBefore(span, script);
+        reset()
+    } else { return false }
 }
