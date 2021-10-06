@@ -33,54 +33,52 @@ for (let i = 0; i < map.length; i++) {
     }
 }
 
+let wins=0;
+
 let usuario = true;
-let win = 0; //variavel para as condições de vitória
-let arr = []; //array para as condições de vitória
 const $column = document.querySelectorAll('.column');
 $column.forEach(collumn => {
     collumn.addEventListener('click', (ev) => {
-        //condição de vitória horizontal
-        for (let x = 1; x <= 7; x++) {
-            arr.push(document.querySelector(`.column_${x}`).children);
-        }
-        let teste = arr[0][0].children.classList; //salvar o nome da class pra fazer a validação a partir dela
-        console.log(teste);
-        //adicionar os discos
-        let append = ev.currentTarget.children; //cria um array com os filhos
-        let index = 0;
-        let valid = 0;
+        if(wins === 0){
+            //adicionar os discos
+            let append = ev.currentTarget.children; //cria um array com os filhos
+            let index = 0;
+            let valid = 0;
 
-        if (usuario) {
-            const disc = document.createElement('div');
-            disc.classList = 'disc';
+            if (usuario) {
+                const disc = document.createElement('div');
+                disc.classList = 'disc';
 
-            //coluna adicina um disco no ultimo filho que estiver vazio 
-            while (valid === 0 && append[5].hasChildNodes() === false) {
-                if (append[index].hasChildNodes() === false) {
-                    append[index].appendChild(disc);
-                    usuario = false;
-                    valid++;
-                } else {
-                    index++;
+                //coluna adicina um disco no ultimo filho que estiver vazio 
+                while (valid === 0 && append[5].hasChildNodes() === false) {
+                    if (append[index].hasChildNodes() === false) {
+                        append[index].appendChild(disc);
+                        usuario = false;
+                        valid++;
+                    } else {
+                        index++;
+                    }
+                }
+            } else {
+                const disc = document.createElement('div');
+                disc.classList = 'discB';
+
+                //coluna adicina um disco no ultimo filho que estiver vazio
+                while (valid === 0 && append[5].hasChildNodes() === false) {
+                    if (append[index].hasChildNodes() === false) {
+                        append[index].appendChild(disc);
+                        usuario = true;
+                        valid++;
+                    } else {
+                        index++;
+                    }
                 }
             }
-        } else {
-            const disc = document.createElement('div');
-            disc.classList = 'discB';
-
-            //coluna adicina um disco no ultimo filho que estiver vazio
-            while (valid === 0 && append[5].hasChildNodes() === false) {
-                if (append[index].hasChildNodes() === false) {
-                    append[index].appendChild(disc);
-                    usuario = true;
-                    valid++;
-                } else {
-                    index++;
-                }
-            }
+            verticalVictory(CheckMap());
+            horizontalVictory(CheckMap());
+            diagonalRightVictory(CheckMap());
+            diagonalLeftVictory(CheckMap());
         }
-
-
     });
 });
 
@@ -104,8 +102,14 @@ let CheckMap = function() {
 let mapMaker = function(x) {
     let result = []
     for (i = 0; i < x.length; i++) {
-        if (x[i].hasChildNodes() === false) { result.push(0) } else {
-            if (x[i].firstElementChild.classList.contains('disc')) { result.push(1) } else { result.push(2) }
+        if (x[i].hasChildNodes() === false) { 
+            result.push(0) 
+        } else {
+            if (x[i].firstElementChild.classList.contains('disc')) { 
+                result.push(1) 
+            } else { 
+                result.push(2) 
+            }
         }
     }
     return result
@@ -123,7 +127,23 @@ let verticalVictory = function(churrus) {
             if (cell !== 0) {
 
                 if (cell === churrus[y][x + 1] && cell === churrus[y][x + 2] && cell === churrus[y][x + 3]) {
-                    console.log("3 in a row found at " + (x + 1) + ":" + (y + 1))
+                    if(churrus[y][x] === 1){
+                        const win = document.querySelector('body');
+                        const span = document.createElement('span');
+                        const script = document.querySelector('script');
+                        const txt = document.createTextNode('Vitória do Vermelho');
+                        span.appendChild(txt);
+                        win.insertBefore(span, script);
+                        wins++;
+                    } else if (churrus[y][x] === 2){
+                        const win = document.querySelector('body');
+                        const span = document.createElement('span');
+                        const script = document.querySelector('script');
+                        const txt = document.createTextNode('Vitória do Preto');
+                        span.appendChild(txt);
+                        win.insertBefore(span, script);
+                        wins++;
+                    }
                 }
             }
         }
@@ -142,7 +162,93 @@ let horizontalVictory = function(churrus) {
             if (cell !== 0) {
 
                 if (cell === churrus[y + 1][x] && cell === churrus[y + 2][x] && cell === churrus[y + 3][x]) {
-                    console.log("3 em sequência encontrados em " + (x + 1) + ":" + (y + 1))
+                    if(churrus[y][x] === 1){
+                        const win = document.querySelector('body');
+                        const span = document.createElement('span');
+                        const script = document.querySelector('script');
+                        const txt = document.createTextNode('Vitória do Vermelho');
+                        span.appendChild(txt);
+                        win.insertBefore(span, script);
+                        wins++;
+                    } else if (churrus[y][x] === 2){
+                        const win = document.querySelector('body');
+                        const span = document.createElement('span');
+                        const script = document.querySelector('script');
+                        const txt = document.createTextNode('Vitória do Preto');
+                        span.appendChild(txt);
+                        win.insertBefore(span, script);
+                        wins++;
+                    }
+                }
+            }
+        }
+    }
+}
+// Função de vitoria diagonal direita ESTÁ PEGANDO
+let diagonalRightVictory = function(board){
+    const edgeX = board[0].length - 3;
+    const edgeY = board.length - 3;
+    // itere cada linha
+    for (let y = 0; y < edgeY; y++) {
+        //itere cada célula em cada linha
+        for (let x = 0; x < edgeX; x++) {
+            cell = board[y][x];
+            //Checa somente se a célula está preenchida
+            if (cell !== 0) {
+                // Checa as próximas três células para o mesmo valor
+                if (cell === board[y + 1][x + 1] && cell === board[y + 2][x + 2] && cell === board[y + 3][x + 3]) {
+                    if(board[y][x] === 1){
+                        const win = document.querySelector('body');
+                        const span = document.createElement('span');
+                        const script = document.querySelector('script');
+                        const txt = document.createTextNode('Vitória do Vermelho');
+                        span.appendChild(txt);
+                        win.insertBefore(span, script);
+                        wins++;
+                    } else if (board[y][x] === 2){
+                        const win = document.querySelector('body');
+                        const span = document.createElement('span');
+                        const script = document.querySelector('script');
+                        const txt = document.createTextNode('Vitória do Preto');
+                        span.appendChild(txt);
+                        win.insertBefore(span, script);
+                        wins++;
+                    }
+                }
+            }
+        }
+    }
+}
+// Função de vitoria diagonal esquerda ESTÁ PEGANDO
+let diagonalLeftVictory = function(board){
+    const edgeX = board[0].length - 2;
+    const edgeY = board.length - 2;
+    // itere cada linha
+    for (let coluna = 3; coluna < board.length; coluna++) {
+         //itere cada célula em cada linha
+        for (let linha = 0; linha < edgeX; linha++) {
+            cell = board[coluna][linha];
+             //Checa somente se a célula está preenchida
+            if (cell !== 0) {
+            // Checa as próximas três células para o mesmo valor
+                if (cell === board[coluna - 1][linha + 1] && cell === board[coluna - 2][linha + 2] && cell === board[coluna - 3][linha + 3]) {
+                    if(board[coluna][linha] === 1){
+                        const win = document.querySelector('body');
+                        const span = document.createElement('span');
+                        const script = document.querySelector('script');
+                        const txt = document.createTextNode('Vitória do Vermelho');
+                        span.appendChild(txt);
+                        win.insertBefore(span, script);
+                        wins++;
+                    } else if (board[coluna][linha] === 2){
+                        const win = document.querySelector('body');
+                        const span = document.createElement('span');
+                        const script = document.querySelector('script');
+                        const txt = document.createTextNode('Vitória do Preto');
+                        span.appendChild(txt);
+                        win.insertBefore(span, script);
+                        wins++;
+                    }
                 }
             }
         }
