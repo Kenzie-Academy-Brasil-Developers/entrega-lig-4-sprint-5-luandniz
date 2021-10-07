@@ -9,7 +9,7 @@ html, body, figure, div, input, textarea, p, h1, h2, h3, h4, h5, h6, ul, summary
 body{
     display: flex;
     height: 100vh;
-    min-width: 395px;
+    min-width: 375px;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -22,20 +22,16 @@ body{
     display: flex;
     flex-flow: row;
     cursor: pointer;
-    width: 390px;
-    min-width: 380px;
+    min-width: 375px;
     height: 350px;
-    padding: 5px;
     backdrop-filter: blur( 10px );
-
 }
 
 .cellStyle{
-    width: 50px;
-    height: 50px;
-    margin: 2px;
+    width: 100%;
+    height: 100%;
+    margin: 2px;   
     border: 1px solid white;
-    border-radius: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,73 +39,97 @@ body{
 }
 
 .buttonReset{
-    font-size: 18px;
+    font-size: 2rem;
     color: #ffffff;
     font-weight: bold;
     border-radius: 7px;
-    padding: 10px 0;
+    padding: 5px 5px;
     letter-spacing: 2px;
     border: 1px solid white;
-    width: 170px;
+    width: 13rem;
     text-align: center;
     background-color: transparent;
     backdrop-filter: blur( 2px );
     cursor: pointer;
-    font-family: 'Staatliches', cursive;
+    font-family: 'New Super Mario Font U', sans-serif;
 }
 .buttonReset:hover{
-  
+    color: #3a5c9c;
+    border: 1px solid #3a5c9c;
+    transition: ease all 0.6s;
 }
 .hidden,
 .hiddenRed,
-.hiddenBlack{
+.hiddenBlack,
+.hiddenDraw{
     display: none;
 }
-.winnerRed{
-    background-color: red;
-    
+.gameWinner{
+    position: fixed;
+    top: 80px;
+    text-align: center;
+    backdrop-filter: blur( 1px );
+    border-radius: 10%;
+    width: 270px;
+    transform: rotate(-10deg);
 }
-.winnerBlack{
-    color: white;
-    background-color: black;
+#gameOver{
+    margin-top: 30px;
+}
+.winnerBlack, .winnerRed, .gameDraw{
+    color: #30a222;
+    font-size: 5rem;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'New Super Mario Font U', sans-serif;
+    line-height: 60px;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #ffffff; 
+}
+.winnerRed{
+    color: #be0600;
+}
+.gameDraw{
+    color:black
+}
+.fa-pause-circle, .fa-play-circle{
+   position: fixed;
+   top: 50px;
+   left: 20px;
+   font-size: 1.3rem;
+   color: white;
+}
+.fa-play-circle{
+    top: 20px;
 }
 section{
-    /* border: 1px solid white; */
     flex: 1;
     display: flex;
     flex-flow: column-reverse;
-    /* width: 20px; */
 }
 div{
     background-color: transparent;
-    /* border: 1px solid white; */   
     flex: 1;
-    /* width: 100%;
-    height: 100%; */
 }
 
 /* disc red */
-.disc{
-    background-image: url("/assets/imagens/mario.png");
+div.disc{
+    background-image: url("/assets/midia/imagens/mario.png");
     background-size: cover;
-    position: relative;
-    border-radius: 50%;
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
-    flex: 1;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 
-.discB{
-    /* background-color: rgb(0, 0, 0); */
-    background-image: url("/assets/imagens/luigi.png");
-    border-radius: 50%;
+div.discB{
+    background-image: url("/assets/midia/imagens/luigi.png");
     background-size: cover;
-    width: 50px;
-    height: 50px;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 
-/* 
+/*
 ************** ANIMATION-RED *****************/
 .animation_red{
     background-color: rgb(226, 58, 16);
@@ -120,42 +140,34 @@ div{
 .animation_red {
     animation-name: animation_red;
     animation-delay: 0.2s;
-    animation-duration: 2.9s;
+    animation-duration: 2.6s;
     animation-iteration-count: 1;
     animation-fill-mode: both;
 }
 @keyframes animation_red{
     0% {
         opacity: 30%;
-        top: 10%;
-        height: 100%;
     }
     25%{
-        background-color: rgba(173, 216, 230, 0.527);
+        background-color: rgba(226, 58, 16, 0.411);
         opacity: 45%;
-        height: 60%;
     }
     50% {
-        background-color: rgba(173, 216, 230, 0.808);
+        background-color: transparent;
         opacity: 55%;
-        height: 40%;
     }
     75%{
-        background-color: rgba(173, 216, 230, 0.938);
+        background-color: transparent;
         opacity: 75%;
-        height: 20%;
     }
     100% {
-        background-color: lightblue;
+        background-color: transparent;
         opacity: 95%;
-        height: 0%;
     }
 }
-
-
 /*************** ANIMAÇÃO-BLACK *****************/
 .animation_black{
-    background-color: #000;
+    background-color: rgba(58, 223, 43, 0.452);
     width: 100%;
     height: 100%;
     border-radius: 50%;
@@ -163,33 +175,39 @@ div{
 .animation_black {
     animation-name: animation_black;
     animation-delay: 0.2s;
-    animation-duration: 2.9s;
+    animation-duration: 2.6s;
     animation-iteration-count: 1;
     animation-fill-mode: both;
 }
 @keyframes animation_black{
     0% {
         opacity: 30%;
-        height: 100%;
     }
     25%{
-        background-color: rgba(173, 216, 230, 0.527);
+        background-color: rgba(58, 223, 43, 0.459);
         opacity: 45%;
-        height: 60%;
     }
     50% {
-        background-color: rgba(173, 216, 230, 0.808);
+        background-color: transparent;
         opacity: 55%;
-        height: 40%;
     }
     75%{
-        background-color: rgba(173, 216, 230, 0.938);
+        background-color: transparent;
         opacity: 75%;
-        height: 20%;
     }
     100% {
-        background-color: lightblue;
+        background-color: transparent;
         opacity: 95%;
-        height: 0%;
+    }
+}
+
+
+
+@media screen and (min-width: 962px){
+    body{
+        background-size: contain;
+    }
+    .gameWinner{
+        top: 23px;
     }
 }

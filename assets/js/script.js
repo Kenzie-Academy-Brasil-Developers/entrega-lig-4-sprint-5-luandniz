@@ -12,25 +12,15 @@ const $wrapper = document.querySelector('#wrapper');
 const createTable=()=>{
 
     for (let i = 0; i < map.length; i++) {
-        //criando as colunas 
         let col = document.createElement('section');
-    
-        //identificação 
         col.classList = `column column_${i+1}`;
 
         col.id = `section_${i+1}`;
-    
-        //ppendurando as colunas no html
         $wrapper.appendChild(col);
     
         for (let j = 0; j < map[i].length; j++) {
-            //criando as divs
             let div = document.createElement('div');
-    
-            //identificação 
             div.classList = `cellStyle column${i+1}`;
-    
-            //pendurando as div nas seção
             col.appendChild(div);
         }
     }
@@ -43,16 +33,13 @@ const $column = document.querySelectorAll('.column');
 $column.forEach(collumn => {
     collumn.addEventListener('click', (ev) => {
         if (wins === 0) {
-            //adicionar os discos
-            let append = ev.currentTarget.children; //cria um array com os filhos
+            let append = ev.currentTarget.children; 
             let index = 0;
             let valid = 0;
 
             if (usuario) {
                 const disc = document.createElement('div');
                 disc.classList = 'disc';
-
-                //coluna adicina um disco no ultimo filho que estiver vazio 
                 while (valid === 0 && append[5].hasChildNodes() === false) {
                     if (append[index].hasChildNodes() === false) {
                         append[index].appendChild(disc);
@@ -66,8 +53,6 @@ $column.forEach(collumn => {
             } else {
                 const disc = document.createElement('div');
                 disc.classList = 'discB';
-
-                //coluna adicina um disco no ultimo filho que estiver vazio
                 while (valid === 0 && append[5].hasChildNodes() === false) {
                     if (append[index].hasChildNodes() === false) {
                         append[index].appendChild(disc);
@@ -87,9 +72,6 @@ $column.forEach(collumn => {
         }
     });
 });
-
-
-
 
 let CheckMap = function() {
     let piece1 = document.querySelectorAll('.column1')
@@ -130,7 +112,10 @@ const messageWinBlack = () => {
     let messageBox = document.querySelector(".hiddenBlack")
     messageBox.classList.replace("hiddenBlack","winnerBlack")
 }
-
+const messageDraw = () => {
+    let messageBox = document.querySelector(".hiddenDraw")
+    messageBox.classList.replace("hiddenDraw",".gameDraw")
+}
 
 let verticalVictory = function() {
     const edgeX = CheckMap()[0].length - 2;
@@ -146,22 +131,9 @@ let verticalVictory = function() {
                 if (cell === CheckMap()[y][x + 1] && cell === CheckMap()[y][x + 2] && cell === CheckMap()[y][x + 3]) {
                     if (CheckMap()[y][x] === 1) {
                         messageWinRed()
-                        // const win = document.querySelector('body');
-                        // const span = document.createElement('span');
-                        // const script = document.querySelector('script');
-                        // console.log(script)
-                        // const txt = document.createTextNode('Vitória do Vermelho');
-                        // span.appendChild(txt);
-                        // win.insertBefore(span, script);
                         wins++;
                         reset();
                     } else if (CheckMap()[y][x] === 2) {
-                        // const win = document.querySelector('body');
-                        // const span = document.createElement('span');
-                        // const script = document.querySelector('script');
-                        // const txt = document.createTextNode('Vitória do Preto');
-                        // span.appendChild(txt);
-                        // win.insertBefore(span, script);
                         messageWinBlack()
                         wins++;
                         reset();
@@ -186,22 +158,10 @@ let horizontalVictory = function() {
                     if (cell === CheckMap()[y + 1][x] && cell === CheckMap()[y + 2][x] && cell === CheckMap()[y + 3][x]) {
                         if (CheckMap()[y][x] === 1) {
                             messageWinRed()
-                            // const win = document.querySelector('body');
-                            // const span = document.createElement('span');
-                            // const script = document.querySelector('script');
-                            // const txt = document.createTextNode('Vitória do Vermelho');
-                            // span.appendChild(txt);
-                            // win.insertBefore(span, script);
                             wins++;
                             reset();
                         } else if (CheckMap()[y][x] === 2) {
                             messageWinBlack()
-                            // const win = document.querySelector('body');
-                            // const span = document.createElement('span');
-                            // const script = document.querySelector('script');
-                            // const txt = document.createTextNode('Vitória do Preto');
-                            // span.appendChild(txt);
-                            // win.insertBefore(span, script);
                             wins++;
                             reset();
                         }
@@ -210,37 +170,20 @@ let horizontalVictory = function() {
             }
         }
     }
-    // Função de vitoria diagonal direita ESTÁ PEGANDO
 let diagonalRightVictory = function() {
         const edgeX = CheckMap()[0].length - 3;
         const edgeY = CheckMap().length - 3;
-        // itere cada linha
         for (let y = 0; y < edgeY; y++) {
-            //itere cada célula em cada linha
             for (let x = 0; x < edgeX; x++) {
                 cell = CheckMap()[y][x];
-                //Checa somente se a célula está preenchida
                 if (cell !== 0) {
-                    // Checa as próximas três células para o mesmo valor
                     if (cell === CheckMap()[y + 1][x + 1] && cell === CheckMap()[y + 2][x + 2] && cell === CheckMap()[y + 3][x + 3]) {
                         if (CheckMap()[y][x] === 1) {
                             messageWinRed()
-                            // const win = document.querySelector('body');
-                            // const span = document.createElement('span');
-                            // const script = document.querySelector('script');
-                            // const txt = document.createTextNode('Vitória do Vermelho');
-                            // span.appendChild(txt);
-                            // win.insertBefore(span, script);
                             wins++;
                             reset();
                         } else if (CheckMap()[y][x] === 2) {
                             messageWinBlack()
-                            // const win = document.querySelector('body');
-                            // const span = document.createElement('span');
-                            // const script = document.querySelector('script');
-                            // const txt = document.createTextNode('Vitória do Preto');
-                            // span.appendChild(txt);
-                            // win.insertBefore(span, script);
                             wins++;
                             reset();
                         }
@@ -249,37 +192,21 @@ let diagonalRightVictory = function() {
             }
         }
     }
-    // Função de vitoria diagonal esquerda ESTÁ PEGANDO
+
 let diagonalLeftVictory = function() {
     const edgeX = CheckMap()[0].length - 2;
     const edgeY = CheckMap().length - 2;
-    // itere cada linha
     for (let coluna = 3; coluna < CheckMap().length; coluna++) {
-        //itere cada célula em cada linha
         for (let linha = 0; linha < edgeX; linha++) {
             cell = CheckMap()[coluna][linha];
-            //Checa somente se a célula está preenchida
             if (cell !== 0) {
-                // Checa as próximas três células para o mesmo valor
                 if (cell === CheckMap()[coluna - 1][linha + 1] && cell === CheckMap()[coluna - 2][linha + 2] && cell === CheckMap()[coluna - 3][linha + 3]) {
                     if (CheckMap()[coluna][linha] === 1) {
                         messageWinRed()
-                        // const win = document.querySelector('body');
-                        // const span = document.createElement('span');
-                        // const script = document.querySelector('script');
-                        // const txt = document.createTextNode('Vitória do Vermelho');
-                        // span.appendChild(txt);
-                        // win.insertBefore(span, script);
                         wins++;
                         reset();
                     } else if (CheckMap()[coluna][linha] === 2) {
                         messageWinBlack()
-                        // const win = document.querySelector('body');
-                        // const span = document.createElement('span');
-                        // const script = document.querySelector('script');
-                        // const txt = document.createTextNode('Vitória do Preto');
-                        // span.appendChild(txt);
-                        // win.insertBefore(span, script);
                         wins++;
                         reset();
                     }
@@ -304,13 +231,7 @@ let draw = function(x) {
 let drawVerificator = function() {
 
     if (draw(0) === true && draw(1) === true && draw(2) === true && draw(3) === true && draw(4) === true && draw(5) === true && draw(6) === true) {
-
-        const win = document.querySelector('body');
-        const span = document.createElement('span');
-        const script = document.querySelector('script');
-        const txt = document.createTextNode('Empate')
-        span.appendChild(txt);
-        win.insertBefore(span, script);
+        messageDraw()
         wins++;
         reset();
     } else { return false }
@@ -348,3 +269,20 @@ const animationBlack =(sectionm)=>{
     }
 
 }
+
+const audio = document.querySelector("#super-mario-theme")
+audio.volume = 0.03;
+
+const playMusic = document.querySelector(".far")
+playMusic.addEventListener("click", function (){
+    const music = document.querySelector("#super-mario-theme")
+    audio.play()
+    audio.volume = 0.03;
+})
+
+const pause = document.querySelector(".fas")
+pause.addEventListener("click", function (){
+    const audio = document.querySelector("#super-mario-theme")
+    audio.pause()
+})
+
