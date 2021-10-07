@@ -28,7 +28,7 @@ const createTable=()=>{
             let div = document.createElement('div');
     
             //identificação 
-            div.classList = `column${i+1}`;
+            div.classList = `cellStyle column${i+1}`;
     
             //pendurando as div nas seção
             col.appendChild(div);
@@ -90,6 +90,7 @@ $column.forEach(collumn => {
 
 
 
+
 let CheckMap = function() {
     let piece1 = document.querySelectorAll('.column1')
     let piece2 = document.querySelectorAll('.column2')
@@ -121,6 +122,16 @@ let mapMaker = function(x) {
     return result
 }
 
+const messageWinRed = () => {
+    let messageBox = document.querySelector(".hiddenRed")
+    messageBox.classList.replace("hiddenRed","winnerRed")
+}
+const messageWinBlack = () => {
+    let messageBox = document.querySelector(".hiddenBlack")
+    messageBox.classList.replace("hiddenBlack","winnerBlack")
+}
+
+
 let verticalVictory = function() {
     const edgeX = CheckMap()[0].length - 2;
     const edgeY = CheckMap().length - 2;
@@ -134,21 +145,24 @@ let verticalVictory = function() {
 
                 if (cell === CheckMap()[y][x + 1] && cell === CheckMap()[y][x + 2] && cell === CheckMap()[y][x + 3]) {
                     if (CheckMap()[y][x] === 1) {
-                        const win = document.querySelector('body');
-                        const span = document.createElement('span');
-                        const script = document.querySelector('script');
-                        const txt = document.createTextNode('Vitória do Vermelho');
-                        span.appendChild(txt);
-                        win.insertBefore(span, script);
+                        messageWinRed()
+                        // const win = document.querySelector('body');
+                        // const span = document.createElement('span');
+                        // const script = document.querySelector('script');
+                        // console.log(script)
+                        // const txt = document.createTextNode('Vitória do Vermelho');
+                        // span.appendChild(txt);
+                        // win.insertBefore(span, script);
                         wins++;
                         reset();
                     } else if (CheckMap()[y][x] === 2) {
-                        const win = document.querySelector('body');
-                        const span = document.createElement('span');
-                        const script = document.querySelector('script');
-                        const txt = document.createTextNode('Vitória do Preto');
-                        span.appendChild(txt);
-                        win.insertBefore(span, script);
+                        // const win = document.querySelector('body');
+                        // const span = document.createElement('span');
+                        // const script = document.querySelector('script');
+                        // const txt = document.createTextNode('Vitória do Preto');
+                        // span.appendChild(txt);
+                        // win.insertBefore(span, script);
+                        messageWinBlack()
                         wins++;
                         reset();
                     }
@@ -171,21 +185,23 @@ let horizontalVictory = function() {
 
                     if (cell === CheckMap()[y + 1][x] && cell === CheckMap()[y + 2][x] && cell === CheckMap()[y + 3][x]) {
                         if (CheckMap()[y][x] === 1) {
-                            const win = document.querySelector('body');
-                            const span = document.createElement('span');
-                            const script = document.querySelector('script');
-                            const txt = document.createTextNode('Vitória do Vermelho');
-                            span.appendChild(txt);
-                            win.insertBefore(span, script);
+                            messageWinRed()
+                            // const win = document.querySelector('body');
+                            // const span = document.createElement('span');
+                            // const script = document.querySelector('script');
+                            // const txt = document.createTextNode('Vitória do Vermelho');
+                            // span.appendChild(txt);
+                            // win.insertBefore(span, script);
                             wins++;
                             reset();
                         } else if (CheckMap()[y][x] === 2) {
-                            const win = document.querySelector('body');
-                            const span = document.createElement('span');
-                            const script = document.querySelector('script');
-                            const txt = document.createTextNode('Vitória do Preto');
-                            span.appendChild(txt);
-                            win.insertBefore(span, script);
+                            messageWinBlack()
+                            // const win = document.querySelector('body');
+                            // const span = document.createElement('span');
+                            // const script = document.querySelector('script');
+                            // const txt = document.createTextNode('Vitória do Preto');
+                            // span.appendChild(txt);
+                            // win.insertBefore(span, script);
                             wins++;
                             reset();
                         }
@@ -208,21 +224,23 @@ let diagonalRightVictory = function() {
                     // Checa as próximas três células para o mesmo valor
                     if (cell === CheckMap()[y + 1][x + 1] && cell === CheckMap()[y + 2][x + 2] && cell === CheckMap()[y + 3][x + 3]) {
                         if (CheckMap()[y][x] === 1) {
-                            const win = document.querySelector('body');
-                            const span = document.createElement('span');
-                            const script = document.querySelector('script');
-                            const txt = document.createTextNode('Vitória do Vermelho');
-                            span.appendChild(txt);
-                            win.insertBefore(span, script);
+                            messageWinRed()
+                            // const win = document.querySelector('body');
+                            // const span = document.createElement('span');
+                            // const script = document.querySelector('script');
+                            // const txt = document.createTextNode('Vitória do Vermelho');
+                            // span.appendChild(txt);
+                            // win.insertBefore(span, script);
                             wins++;
                             reset();
                         } else if (CheckMap()[y][x] === 2) {
-                            const win = document.querySelector('body');
-                            const span = document.createElement('span');
-                            const script = document.querySelector('script');
-                            const txt = document.createTextNode('Vitória do Preto');
-                            span.appendChild(txt);
-                            win.insertBefore(span, script);
+                            messageWinBlack()
+                            // const win = document.querySelector('body');
+                            // const span = document.createElement('span');
+                            // const script = document.querySelector('script');
+                            // const txt = document.createTextNode('Vitória do Preto');
+                            // span.appendChild(txt);
+                            // win.insertBefore(span, script);
                             wins++;
                             reset();
                         }
@@ -245,21 +263,23 @@ let diagonalLeftVictory = function() {
                 // Checa as próximas três células para o mesmo valor
                 if (cell === CheckMap()[coluna - 1][linha + 1] && cell === CheckMap()[coluna - 2][linha + 2] && cell === CheckMap()[coluna - 3][linha + 3]) {
                     if (CheckMap()[coluna][linha] === 1) {
-                        const win = document.querySelector('body');
-                        const span = document.createElement('span');
-                        const script = document.querySelector('script');
-                        const txt = document.createTextNode('Vitória do Vermelho');
-                        span.appendChild(txt);
-                        win.insertBefore(span, script);
+                        messageWinRed()
+                        // const win = document.querySelector('body');
+                        // const span = document.createElement('span');
+                        // const script = document.querySelector('script');
+                        // const txt = document.createTextNode('Vitória do Vermelho');
+                        // span.appendChild(txt);
+                        // win.insertBefore(span, script);
                         wins++;
                         reset();
                     } else if (CheckMap()[coluna][linha] === 2) {
-                        const win = document.querySelector('body');
-                        const span = document.createElement('span');
-                        const script = document.querySelector('script');
-                        const txt = document.createTextNode('Vitória do Preto');
-                        span.appendChild(txt);
-                        win.insertBefore(span, script);
+                        messageWinBlack()
+                        // const win = document.querySelector('body');
+                        // const span = document.createElement('span');
+                        // const script = document.querySelector('script');
+                        // const txt = document.createTextNode('Vitória do Preto');
+                        // span.appendChild(txt);
+                        // win.insertBefore(span, script);
                         wins++;
                         reset();
                     }
@@ -270,13 +290,9 @@ let diagonalLeftVictory = function() {
 }
 
 let reset = function() {
-    const reset = document.querySelector('body');
-    const script = document.querySelector('script');
-    const button = document.createElement('button');
-    const txt = document.createTextNode('Jogar Novamente');
-    button.appendChild(txt);
-    reset.insertBefore(button, script);
-    button.addEventListener('click', (e) => location.reload());
+    let buttonReload = document.querySelector(".hidden")
+    buttonReload.classList.replace("hidden","buttonReset")
+    buttonReload.addEventListener('click', (e) => location.reload());
 }
 
 let draw = function(x) {
