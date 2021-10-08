@@ -15,7 +15,7 @@ body{
     flex-direction: column;
     background-size: cover;
     background-position: top;
-    background-image: url("https://www.teahub.io/photos/full/290-2907511_super-mario-bros-wallpaper-s10.jpg");
+    background-image: url("/assets/midia/imagens/bgMario.jpg");
 }
 
 #wrapper{
@@ -90,14 +90,15 @@ body{
     color: #be0600;
 }
 .gameDraw{
-    color:black
+    color:#3a5c9c;
 }
 .fa-pause-circle, .fa-play-circle{
    position: fixed;
-   top: 50px;
+   top: 70px;
    left: 20px;
-   font-size: 1.3rem;
+   font-size: 2rem;
    color: white;
+   cursor: pointer;
 }
 .fa-play-circle{
     top: 20px;
@@ -202,12 +203,19 @@ div.discB{
 }
 
 
+@media screen and (min-width: 768px){
 
+}
 @media screen and (min-width: 962px){
     body{
         background-size: contain;
     }
     .gameWinner{
-        top: 23px;
+        top: 45px;
+    }
+    #wrapper{
+        width: 500px;
+        height: 455px;
+
     }
 }
