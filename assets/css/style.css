@@ -1,5 +1,3 @@
-@import url('http://fonts.cdnfonts.com/css/new-super-mario-font-u');
-
 html, body, figure, div, input, textarea, p, h1, h2, h3, h4, h5, h6, ul, summary, footer, main, aside, section{
     margin: 0;
     padding: 0;
@@ -48,12 +46,13 @@ body{
     padding: 5px 5px;
     letter-spacing: 2px;
     border: 1px solid white;
-    width: 13rem;
+    width: 15rem;
     text-align: center;
     background-color: transparent;
     backdrop-filter: blur( 2px );
     cursor: pointer;
-    font-family: 'New Super Mario Font U', sans-serif;
+    /* font-family: 'New Super Mario Font U', sans-serif; */
+    font-family: 'Rampart One', cursive;
 }
 .buttonReset:hover{
     color: #3a5c9c;
@@ -67,9 +66,9 @@ body{
     display: none;
 }
 .gameWinner{
-    position: fixed;
-    top: 80px;
-    text-align: center;
+    position: absolute;
+    top: 55px;
+    align-items: center;
     backdrop-filter: blur( 1px );
     border-radius: 10%;
     width: 270px;
@@ -79,31 +78,29 @@ body{
     margin-top: 30px;
 }
 .winnerBlack, .winnerRed, .gameDraw{
-    color: #30a222;
     font-size: 5rem;
     font-weight: bold;
     text-align: center;
-    font-family: 'New Super Mario Font U', sans-serif;
-    line-height: 60px;
+    font-family: 'Rampart One', cursive;
+    line-height: 73px;
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: #ffffff; 
 }
-.winnerRed{
-    color: #be0600;
-}
-.gameDraw{
-    color:#3a5c9c;
-}
-.fa-pause-circle, .fa-play-circle{
+.fa-play-circle{
    position: fixed;
-   top: 70px;
+   top: 10px;
    left: 20px;
    font-size: 2rem;
    color: white;
    cursor: pointer;
 }
-.fa-play-circle{
-    top: 20px;
+.fa-pause-circle{
+    position: fixed;
+    top: 10px;
+    left: 60px;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
 }
 section{
     flex: 1;

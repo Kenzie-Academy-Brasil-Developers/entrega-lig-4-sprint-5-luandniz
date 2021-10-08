@@ -170,7 +170,7 @@ let horizontalVictory = function() {
             }
         }
     }
-    
+
 let diagonalRightVictory = function() {
         const edgeX = CheckMap()[0].length - 3;
         const edgeY = CheckMap().length - 3;
@@ -271,9 +271,6 @@ const animationBlack =(sectionm)=>{
     }
 
 }
-
-
-
 
 const playMusic = document.querySelector(".far")
 playMusic.addEventListener("click", function (){
