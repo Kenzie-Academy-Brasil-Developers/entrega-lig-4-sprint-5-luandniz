@@ -15,7 +15,7 @@ body{
     flex-direction: column;
     background-size: cover;
     background-position: top;
-    background-image: url("/assets/midia/imagens/bgMario.jpg");
+    background-image: url("../midia/imagens/bgMario.jpg");
 }
 
 #wrapper{
