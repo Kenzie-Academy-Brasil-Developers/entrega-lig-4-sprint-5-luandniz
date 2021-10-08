@@ -114,7 +114,7 @@ const messageWinBlack = () => {
 }
 const messageDraw = () => {
     let messageBox = document.querySelector(".hiddenDraw")
-    messageBox.classList.replace("hiddenDraw",".gameDraw")
+    messageBox.classList.replace("hiddenDraw","gameDraw")
 }
 
 let verticalVictory = function() {
@@ -231,9 +231,10 @@ let draw = function(x) {
 let drawVerificator = function() {
 
     if (draw(0) === true && draw(1) === true && draw(2) === true && draw(3) === true && draw(4) === true && draw(5) === true && draw(6) === true) {
-        messageDraw()
         wins++;
+        messageDraw();
         reset();
+       
     } else { return false }
 }
 
@@ -271,13 +272,13 @@ const animationBlack =(sectionm)=>{
 }
 
 const audio = document.querySelector("#super-mario-theme")
-audio.volume = 0.03;
+audio.volume = 0.06;
 
 const playMusic = document.querySelector(".far")
 playMusic.addEventListener("click", function (){
     const music = document.querySelector("#super-mario-theme")
     audio.play()
-    audio.volume = 0.03;
+    audio.volume = 0.06;
 })
 
 const pause = document.querySelector(".fas")
