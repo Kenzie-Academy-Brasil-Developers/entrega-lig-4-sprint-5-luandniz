@@ -170,6 +170,7 @@ let horizontalVictory = function() {
             }
         }
     }
+    
 let diagonalRightVictory = function() {
         const edgeX = CheckMap()[0].length - 3;
         const edgeY = CheckMap().length - 3;
@@ -271,12 +272,12 @@ const animationBlack =(sectionm)=>{
 
 }
 
-const audio = document.querySelector("#super-mario-theme")
-audio.volume = 0.06;
+
+
 
 const playMusic = document.querySelector(".far")
 playMusic.addEventListener("click", function (){
-    const music = document.querySelector("#super-mario-theme")
+    const audio = document.querySelector("#super-mario-theme")
     audio.play()
     audio.volume = 0.06;
 })
